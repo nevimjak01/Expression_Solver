@@ -52,7 +52,7 @@ public enum Operation {
         }
     },
     COTG("cotg",1){
-        public double  calc( double number1, double number2){
+        public double calc( double number1, double number2){
             return 1/Math.tan(number1);
         }
     };
@@ -63,21 +63,23 @@ public enum Operation {
     private String operationString;
     private int argumentNumber;
 
-    Operation(String operationString, int argumentNumber){
+    Operation(String operationString, String regexString, int depthLevel){
         this.operationString = operationString;
-        this.argumentNumber = argumentNumber;
+        this.regexString = regexString;
+        this.depthLevel = depthLevel;
     }
 
-    public Operation parse(String operation) {
-
-
-        for (Operation oper : operations) {
-
-            if (operation.equals(oper.operationString)) {
-                return oper;
+    public static Operation parse(String operationString) {
+        for (Operation operation : Operation.values()){
+            if (operationString.equals(operation.operationString)){
+                return operation;
             }
         }
         return null;
+    }
+
+    public static String insertSpaces(String expression){
+        
     }
 
 }
